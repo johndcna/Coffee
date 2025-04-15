@@ -1,4 +1,5 @@
-﻿using Coffee.API.Models;
+﻿using Coffee.API.Common;
+using Coffee.API.Models;
 
 namespace Coffee.API.Services.Interfaces
 {
@@ -24,15 +25,15 @@ namespace Coffee.API.Services.Interfaces
     {
         public CoffeeResponse GetMessage(DateTime date)
         {
-            if (date.Month == 4 && date.Day == 1)
+            if (date.Month == 4 && date.Day == 15)
             {
                 return new CoffeeResponse
                 {
-                    StatusCode = 413
+                    StatusCode = Constants.StatusCodes.ImATeaPot
 
                 };
             }
-
+            
             return null;
         }
     }

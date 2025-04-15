@@ -1,3 +1,4 @@
+using Coffee.API.Common;
 using Coffee.API.Controllers;
 using Coffee.API.Models;
 using Coffee.API.Services.Interfaces;
@@ -15,13 +16,11 @@ namespace Coffee.Test
         {
             _coffeeService = new Mock<ICoffeeService>();          
             _controller = new CoffeeController(_coffeeService.Object);
-
-
         }
 
 
         [Fact]
-        public async Task GetCoffee_ShouldReturn200_WhenCalled()
+        public async Task GetCoffee_ShouldReturnStatusCode200_WhenCalled()
         {
             // Arrange
             var defaultMessage = "Your piping hot coffee is ready";
@@ -32,7 +31,7 @@ namespace Coffee.Test
                     Message = defaultMessage,
                     Prepared = DateTime.Today.ToString("O")
                 },
-                StatusCode = 200
+                StatusCode = Constants.StatusCodes.Success
             };
 
             _coffeeService

@@ -1,4 +1,6 @@
-﻿using Coffee.API.Models;
+﻿using Coffee.API.Common;
+using Coffee.API.Common.Interfaces;
+using Coffee.API.Models;
 using Coffee.API.Services.Interfaces;
 
 namespace Coffee.API.Services.Implementation
@@ -6,14 +8,16 @@ namespace Coffee.API.Services.Implementation
     public class CoffeeService : ICoffeeService
     {
         private readonly IEnumerable<ICoffeeMessage> _coffeeMessage;
+        private readonly IDateProvider _dateProvider;
 
-        public CoffeeService(IEnumerable<ICoffeeMessage> coffeeMessage)
+        public CoffeeService(IEnumerable<ICoffeeMessage> coffeeMessage, IDateProvider dateProvider)
         {
             _coffeeMessage = coffeeMessage;
+            _dateProvider = dateProvider;
         }
         public async Task<ResponseService<CoffeeDetail>> GetCoffee(CancellationToken cancellationToken)
         {
-            var today = DateTime.Today;
+            var today = _dateProvider.Today;
 
             var result = _coffeeMessage
                        .Select(p => p.GetMessage(today))
@@ -23,10 +27,10 @@ namespace Coffee.API.Services.Implementation
             {
                 Data = new CoffeeDetail
                 {
-                    Message = result.Message,
+                    Message = result?.Message,
                     Prepared = DateTime.Today.ToString("O")
                 },
-                StatusCode = result.StatusCode
+                StatusCode = result?.StatusCode ?? Constants.StatusCodes.NotFound
             };
         }
     }

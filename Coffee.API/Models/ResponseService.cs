@@ -1,8 +1,10 @@
-﻿namespace Coffee.API.Models
+﻿using Coffee.API.Common;
+
+namespace Coffee.API.Models
 {
     public class ResponseService<T>
     {
         public T? Data { get; set; }
-        public int StatusCode {get;set;} = 200;
+        public int StatusCode {get;set;} = Constants.StatusCodes.Success;
     }
 }

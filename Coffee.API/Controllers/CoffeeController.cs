@@ -1,4 +1,4 @@
-﻿using Coffee.API.Models;
+﻿using Coffee.API.Common;
 using Coffee.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -21,7 +21,7 @@ namespace Coffee.API.Controllers
         {
             var result = await _coffeeService.GetCoffee(cancellationToken);
 
-            if (result.StatusCode != 200) 
+            if (result.StatusCode != Constants.StatusCodes.Success) 
             {
                 return StatusCode((int)result.StatusCode,null);
             }

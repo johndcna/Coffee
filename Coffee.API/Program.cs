@@ -1,3 +1,5 @@
+using Coffee.API.Common.Implementations;
+using Coffee.API.Common.Interfaces;
 using Coffee.API.Services.Implementation;
 using Coffee.API.Services.Interfaces;
 using Microsoft.AspNetCore.RateLimiting;
@@ -39,6 +41,8 @@ internal class Program
         builder.Services.AddScoped<ICoffeeService, CoffeeService>();
         builder.Services.AddTransient<ICoffeeMessage, AprilCoffeeMessageProvider>();
         builder.Services.AddTransient<ICoffeeMessage, DefaultCoffeeMessageProvider>();
+
+        builder.Services.AddTransient<IDateProvider, SystemDateProvider>();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
