@@ -31,11 +31,15 @@ namespace Coffee.Tests.Services
 
             _coffeeDefaultProvider
                 .Setup(p => p.GetMessage(today))
-                .Returns((CoffeeResponse)null);
+                 .ReturnsAsync(new CoffeeResponse
+                 {
+                     Message = "Your piping hot coffee is ready",
+                     StatusCode = 200
+                 });
 
             _coffeeAprilProvider
                 .Setup(p => p.GetMessage(today))
-                .Returns(new CoffeeResponse
+                .ReturnsAsync(new CoffeeResponse
                 {
                     Message = expectedMessage,
                     StatusCode = expectedStatusCode
@@ -70,22 +74,17 @@ namespace Coffee.Tests.Services
 
             _coffeeAprilProvider
                 .Setup(p => p.GetMessage(aprilFoolsDate))
-                .Returns(new CoffeeResponse
+                .ReturnsAsync(new CoffeeResponse
                 {
                     StatusCode = Constants.StatusCodes.ImATeaPot,
                     Message = null
                 });
-
-            _coffeeDefaultProvider
-                .Setup(p => p.GetMessage(aprilFoolsDate))
-                .Returns((CoffeeResponse)null); 
 
 
             _dateProvider.Setup(p => p.Today).Returns(aprilFoolsDate);
 
             var coffeeProviders = new List<ICoffeeMessage>
             {
-                _coffeeDefaultProvider.Object,
                 _coffeeAprilProvider.Object
             };
 
@@ -98,6 +97,10 @@ namespace Coffee.Tests.Services
             Assert.Equal(Constants.StatusCodes.ImATeaPot, result.StatusCode);
             Assert.Null(result.Data.Message);
         }
+
+
+
+
 
 
 

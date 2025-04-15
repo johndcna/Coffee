@@ -19,7 +19,7 @@ namespace Coffee.API.Services.Implementation
         {
             var today = _dateProvider.Today;
 
-            var result = _coffeeMessage
+            var result = await _coffeeMessage
                        .Select(p => p.GetMessage(today))
                        .FirstOrDefault(m => m != null);
 

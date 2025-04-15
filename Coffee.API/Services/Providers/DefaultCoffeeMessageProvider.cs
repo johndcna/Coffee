@@ -5,13 +5,13 @@ namespace Coffee.API.Services.Providers
 {
     public class DefaultCoffeeMessageProvider : ICoffeeMessage
     {
-        public CoffeeResponse GetMessage(DateTime date)
+        public Task<CoffeeResponse> GetMessage(DateTime date)
         {
-            return new CoffeeResponse
+            return Task.FromResult(new CoffeeResponse
             {
                 Message = "Your piping hot coffee is ready"
 
-            };
+            });
 
         }
     }

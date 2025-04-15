@@ -6,15 +6,15 @@ namespace Coffee.API.Services.Providers
 {
     public class AprilCoffeeMessageProvider : ICoffeeMessage
     {
-        public CoffeeResponse GetMessage(DateTime date)
+        public Task<CoffeeResponse> GetMessage(DateTime date)
         {
             if (date.Month == 4 && date.Day == 1)
             {
-                return new CoffeeResponse
+                return Task.FromResult(new CoffeeResponse
                 {
                     StatusCode = Constants.StatusCodes.ImATeaPot
 
-                };
+                });
             }
 
             return null;
