@@ -2,6 +2,7 @@ using Coffee.API.Common.Implementations;
 using Coffee.API.Common.Interfaces;
 using Coffee.API.Services.Implementation;
 using Coffee.API.Services.Interfaces;
+using Coffee.API.Services.Providers;
 using Microsoft.AspNetCore.RateLimiting;
 
 internal class Program
