@@ -8,7 +8,7 @@ namespace Coffee.API.Services.Providers
     {
         public Task<CoffeeResponse> GetMessage(DateTime date)
         {
-            if (date.Month == 4 && date.Day == 1)
+            if (date.Month == 4 && date.Day == 16)
             {
                 return Task.FromResult(new CoffeeResponse
                 {
