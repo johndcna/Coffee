@@ -28,7 +28,7 @@ namespace Coffee.API.Services.Implementation
                 Data = new CoffeeDetail
                 {
                     Message = result?.Message,
-                    Prepared = DateTime.Today.ToString("O")
+                    Prepared = DateTime.Now.ToString("O")
                 },
                 StatusCode = result?.StatusCode ?? Constants.StatusCodes.NotFound
             };
