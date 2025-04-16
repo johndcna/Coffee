@@ -34,7 +34,7 @@ namespace Coffee.Tests.Services
                  .ReturnsAsync(new CoffeeResponse
                  {
                      Message = "Your piping hot coffee is ready",
-                     StatusCode = 200
+                     StatusCode = Constants.StatusCodes.Success
                  });
 
             _coffeeAprilProvider
