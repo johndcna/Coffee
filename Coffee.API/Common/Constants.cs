@@ -9,7 +9,6 @@
             public const int ImATeaPot = 418;
             public const int NotFound = 404;
 
-            // Add more as needed
         }
     }
 }
