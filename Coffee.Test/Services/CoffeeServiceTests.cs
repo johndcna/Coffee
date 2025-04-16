@@ -25,7 +25,7 @@ namespace Coffee.Tests.Services
         public async Task GetCoffee_ShouldReturnStatusCode200_WhenCalledWithCurrentDate()
         {
             // Arrange
-            var today = DateTime.Today;
+            var today = DateTime.Now;
             var expectedMessage = "Your piping hot coffee is ready";
             var expectedStatusCode = Constants.StatusCodes.Success;
 
@@ -45,7 +45,7 @@ namespace Coffee.Tests.Services
                     StatusCode = expectedStatusCode
                 });
 
-            _dateProvider.Setup(p => p.Today).Returns(DateTime.Today);
+            _dateProvider.Setup(p => p.DateNow).Returns(today);
 
             var coffeeProviders = new List<ICoffeeMessage>
             {
@@ -70,10 +70,10 @@ namespace Coffee.Tests.Services
         public async Task GetCoffee_ShouldReturnStatusCode418_WhenCalledWithAprilFirst()
         {
             // Arrange
-            var aprilFoolsDate = new DateTime(DateTime.Today.Year, 4, 1);
+            var aprilFirst = new DateTime(DateTime.Today.Year, 4, 1);
 
             _coffeeAprilProvider
-                .Setup(p => p.GetMessage(aprilFoolsDate))
+                .Setup(p => p.GetMessage(aprilFirst))
                 .ReturnsAsync(new CoffeeResponse
                 {
                     StatusCode = Constants.StatusCodes.ImATeaPot,
@@ -81,7 +81,7 @@ namespace Coffee.Tests.Services
                 });
 
 
-            _dateProvider.Setup(p => p.Today).Returns(aprilFoolsDate);
+            _dateProvider.Setup(p => p.DateNow).Returns(aprilFirst);
 
             var coffeeProviders = new List<ICoffeeMessage>
             {

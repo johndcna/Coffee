@@ -17,7 +17,7 @@ namespace Coffee.API.Services.Implementation
         }
         public async Task<ResponseService<CoffeeDetail>> GetCoffee(CancellationToken cancellationToken)
         {
-            var today = _dateProvider.Today;
+            var today = _dateProvider.DateNow;
 
             var result = await _coffeeMessage
                        .Select(p => p.GetMessage(today))
@@ -28,7 +28,7 @@ namespace Coffee.API.Services.Implementation
                 Data = new CoffeeDetail
                 {
                     Message = result?.Message,
-                    Prepared = DateTime.Now.ToString("O")
+                    Prepared = today.ToString("O")
                 },
                 StatusCode = result?.StatusCode ?? Constants.StatusCodes.NotFound
             };
