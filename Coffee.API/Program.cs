@@ -37,13 +37,17 @@ internal class Program
             };
         });
 
-
         //Repositories
+
         builder.Services.AddScoped<ICoffeeService, CoffeeService>();
+        builder.Services.AddTransient<ICoffeeMessage, WeatherCheckCoffeeMessageProvider>();
         builder.Services.AddTransient<ICoffeeMessage, AprilCoffeeMessageProvider>();
         builder.Services.AddTransient<ICoffeeMessage, DefaultCoffeeMessageProvider>();
+        
 
         builder.Services.AddTransient<IDateProvider, SystemDateProvider>();
+        builder.Services.AddHttpClient<IWeatherService, OpenWeatherService>();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
